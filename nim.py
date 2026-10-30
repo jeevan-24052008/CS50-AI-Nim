@@ -1,12 +1,11 @@
-import math
 import random
-import time
 
 
 class Nim():
 
-    def __init__(self, initial=[1, 3, 5, 7]):
-       
+    def __init__(self, initial=None):
+        if initial is None:
+            initial = [1, 3, 5, 7]
         self.piles = initial.copy()
         self.player = 0
         self.winner = None
@@ -95,14 +94,14 @@ class NimAI():
         return max(actions, key=lambda action: self.get_q_value(state, action))
 
 
-def train(n):
-  
+def train(n, verbose=False):
 
     player = NimAI()
 
     # Play n games
     for i in range(n):
-        print(f"Playing training game {i + 1}")
+        if verbose:
+            print(f"Playing training game {i + 1}")
         game = Nim()
 
         # Keep track of last move made by either player
@@ -146,7 +145,8 @@ def train(n):
                     0
                 )
 
-    print("Done training")
+    if verbose:
+        print("Done training")
 
     # Return the trained AI
     return player
@@ -174,7 +174,6 @@ def play(ai, human_player=None):
 
         # Compute available actions
         available_actions = Nim.available_actions(game.piles)
-        time.sleep(1)
 
         # Let human make a move
         if game.player == human_player:

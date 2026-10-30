@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101211">
+    <meta name="description" content="Play the classic game of Nim against a Q-learning AI trained with CS50's Introduction to Artificial Intelligence with Python.">
+    <title>Nim — Human vs AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Nim home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>NIM<span class="brand-period">.</span></span></a>
+        <div class="topbar-meta"><span class="live-dot"></span><span>CS50 AI · REINFORCEMENT LEARNING</span></div>
+        <a class="github-link" href="https://github.com/jeevan-24052008/CS50-AI-Nim" target="_blank" rel="noreferrer">View project <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="eyebrow"><span class="eyebrow-line"></span> A GAME OF STRATEGY</div>
+          <h1 id="page-title">Take your <span>best shot.</span></h1>
+          <p class="intro-copy">A classic game of Nim, played against an AI that learned through experience.<br class="desktop-break"> Take the last object and you lose.</p>
+        </section>
+
+        <section class="game-layout" aria-label="Nim game">
+          <div class="game-card">
+            <div class="game-topline">
+              <div class="match-label"><span class="match-icon">✳</span> MATCH 01 <span class="match-divider">/</span> FIRST TO PLAY</div>
+              <button id="restart-button" class="restart-button" type="button"><span aria-hidden="true">↻</span> New game</button>
+            </div>
+
+            <div class="players" aria-label="Players">
+              <div id="human-player" class="player-card active-player" aria-current="true">
+                <div class="avatar human-avatar" aria-hidden="true">Y</div>
+                <div><div class="player-name">You <span class="you-tag">YOU</span></div><div class="player-state" id="human-state">Your turn</div></div>
+                <span class="turn-indicator" aria-hidden="true"></span>
+              </div>
+              <div class="versus">VS</div>
+              <div id="ai-player" class="player-card">
+                <div class="avatar ai-avatar" aria-hidden="true"><span>✳</span></div>
+                <div><div class="player-name">Nim AI</div><div class="player-state" id="ai-state">Ready to play</div></div>
+                <span class="turn-indicator" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="status-banner" id="status-banner" role="status" aria-live="polite">
+              <span class="status-symbol" aria-hidden="true">⌁</span>
+              <span id="status-message">Choose a pile, then select how many objects to take.</span>
+            </div>
+
+            <div class="board-heading"><span>THE BOARD</span><span id="objects-remaining">16 OBJECTS REMAIN</span></div>
+            <div id="board" class="board" aria-label="Nim piles"></div>
+
+            <div class="move-footer">
+              <div class="selection-copy"><span class="selection-label">YOUR MOVE</span><span id="selection-summary">Select objects from a pile</span></div>
+              <button id="take-button" class="take-button" type="button" disabled>Take objects <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+
+          <aside class="info-card" aria-labelledby="about-heading">
+            <div class="info-heading"><div class="info-icon" aria-hidden="true">✳</div><div><div class="info-kicker">UNDER THE HOOD</div><h2 id="about-heading">Meet your opponent</h2></div></div>
+            <p class="info-description">No hard-coded strategy. This AI learned what works by playing thousands of games and learning from every move.</p>
+            <div class="model-state"><span class="model-indicator"></span><span id="model-status">Checking model…</span><span class="model-spacer"></span><span class="model-label">MODEL</span></div>
+            <div class="stats-grid">
+              <div class="stat-cell"><span class="stat-label">ALGORITHM</span><span class="stat-value">Q-learning</span></div>
+              <div class="stat-cell"><span class="stat-label">TRAINING EPISODES</span><span class="stat-value">10,000</span></div>
+              <div class="stat-cell"><span class="stat-label">LEARNING RATE <span class="mono-label">α</span></span><span class="stat-value" id="alpha-value">—</span></div>
+              <div class="stat-cell"><span class="stat-label">EXPLORATION <span class="mono-label">ε</span></span><span class="stat-value" id="epsilon-value">—</span></div>
+            </div>
+            <button id="retrain-button" class="retrain-button" type="button"><span aria-hidden="true">⟳</span> Retrain the model <span class="retrain-arrow" aria-hidden="true">↗</span></button>
+            <p class="retrain-note">Runs 10,000 training games and replaces the saved model.</p>
+          </aside>
+        </section>
+
+        <section class="how-to" aria-label="How to play"><span class="how-to-label">HOW TO PLAY</span><span><b>01</b> Choose a pile</span><span class="how-divider">·</span><span><b>02</b> Pick an object to set how many to take</span><span class="how-divider">·</span><span><b>03</b> Take the last one and you lose</span></section>
+      </main>
+
+      <footer class="footer"><span>BUILT WITH CS50’S INTRODUCTION TO ARTIFICIAL INTELLIGENCE</span><span>LEARNED, NOT PROGRAMMED <span class="footer-spark">✳</span></span></footer>
+    </div>
+  </body>
+</html>

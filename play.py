@@ -1,4 +1,8 @@
-from nim import train, play
+"""Run the original terminal game with the persistent Q-learning model."""
 
-ai = train(10000)
-play(ai)
+from app import _ai
+from nim import play
+
+
+if __name__ == "__main__":
+    play(_ai)
